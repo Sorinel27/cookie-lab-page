@@ -1,19 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Lab Cookie</title>
+  <meta charset="UTF-8">
+  <title>Exerciții Cookie - Lab 9-10</title>
 </head>
 <body>
-  <script>
-    document.cookie = "session=test GDPR";
-    document.cookie = "favorite_task=collect Data";
+  <h1>Exemple de folosire a cookie-urilor (MDN)</h1>
 
-    function alertCookie() {
-      alert(document.cookie);
+  <button onclick="setCookie()">Set cookie simplu</button>
+  <button onclick="setCookieExpire()">Set cookie cu expirare</button>
+  <button onclick="setCookiePath()">Set cookie pe alt path</button>
+  <button onclick="updateCookie()">Update cookie existent</button>
+  <button onclick="deleteCookie()">Șterge cookie</button>
+  <button onclick="showCookies()">Afișează toate cookie-urile</button>
+
+  <script>
+    function setCookie() {
+      document.cookie = "username=studentUT; SameSite=Lax";
+      alert("Cookie 'username' setat.");
+    }
+
+    function setCookieExpire() {
+      const d = new Date();
+      d.setTime(d.getTime() + (60 * 1000)); // 1 minut
+      let expires = "expires=" + d.toUTCString();
+      document.cookie = "shortLivedCookie=valoare123; " + expires + "; path=/";
+      alert("Cookie cu expirare setat.");
+    }
+
+    function setCookiePath() {
+      document.cookie = "onlyOnPath=visibleJustHere; path=/lab";
+      alert("Cookie cu path=/lab setat.");
+    }
+    
+    function updateCookie() {
+      document.cookie = "username=actualizat;";
+      alert("Cookie 'username' actualizat.");
+    }
+    
+    function deleteCookie() {
+      document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      alert("Cookie 'username' șters.");
+    }
+    
+    function showCookies() {
+      alert("Cookie-uri active:\n" + document.cookie);
     }
   </script>
-
-  <h1>Bine ai venit la lab</h1>
-  <button onclick="alertCookie()">Show cookies</button>
 </body>
 </html>
